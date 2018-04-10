@@ -203,7 +203,7 @@ def seq2seq_model(input_data, targets, lr, target_sequence_length,
 
 # 超参数
 # Number of Epochs
-epochs = 60
+epochs = 5
 # Batch Size
 batch_size = 128
 # RNN Size
@@ -314,9 +314,9 @@ display_step = 50 # 每50轮输出loss
 
 checkpoint = 'trained_model.ckpt'
 
+
 with tf.Session(graph=train_graph) as sess:
     sess.run(tf.global_variables_initializer())
-
     for epoch_i in range(1, epochs + 1):
         for batch_i, (targets_batch, sources_batch, targets_lengths, sources_lengths) in enumerate(
             get_batches(train_target, train_source, batch_size, sl2i['<PAD>'], tl2i['<PAD>'])):
@@ -347,6 +347,47 @@ with tf.Session(graph=train_graph) as sess:
                               len(train_source) // batch_size,
                               loss,
                               validation_loss[0]))
-    saver = tf.train.Saver()
-    saver.save(sess, './' + checkpoint)
-    print('Model Trained and Saved')
+    # saver = tf.train.Saver()
+    # saver.save(sess, './' + checkpoint)
+    # print('Model Trained and Saved')
+
+# def source_to_seq(text):
+#     '''
+#     对源数据进行转换
+#     '''
+#     sequence_length = 7
+#     return [sl2i.get(word, sl2i['<UNK>']) for word in text] + [sl2i['<PAD>']]*(sequence_length-len(text))
+#
+# # 输入一个单词
+# input_word = 'common'
+# text = source_to_seq(input_word)
+#
+# checkpoint = "./trained_model.ckpt"
+#
+# loaded_graph = tf.Graph()
+# with tf.Session(graph=loaded_graph) as sess:
+#     # 加载模型
+#     loader = tf.train.import_meta_graph(checkpoint + '.meta')
+#     loader.restore(sess, checkpoint)
+#
+#     input_data = loaded_graph.get_tensor_by_name('inputs:0')
+#     logits = loaded_graph.get_tensor_by_name('predictions:0')
+#     source_sequence_length = loaded_graph.get_tensor_by_name('source_sequence_length:0')
+#     target_sequence_length = loaded_graph.get_tensor_by_name('target_sequence_length:0')
+#
+#     answer_logits = sess.run(logits, {input_data: [text]*batch_size,
+#                                       target_sequence_length: [len(input_word)]*batch_size,
+#                                       source_sequence_length: [len(input_word)]*batch_size})[0]
+#
+#
+# pad = sl2i["<PAD>"]
+#
+# print('原始输入:', input_word)
+#
+# print('\nSource')
+# print('  Word 编号:    {}'.format([i for i in text]))
+# print('  Input Words: {}'.format(" ".join([si2l[i] for i in text])))
+#
+# print('\nTarget')
+# print('  Word 编号:       {}'.format([i for i in answer_logits if i != pad]))
+# print('  Response Words: {}'.format(" ".join([ti2l[i] for i in answer_logits if i != pad])))
