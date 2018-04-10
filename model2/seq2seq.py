@@ -3,9 +3,9 @@ import time
 import numpy as np
 from tensorflow.python.layers.core import Dense
 
-with open('in.txt') as f:
+with open('input_data.txt') as f:
     source_data = f.read()
-with open('out.txt') as f:
+with open('target_data.txt') as f:
     target_data = f.read()
 
 print(target_data.split('\n')[:10])
@@ -203,153 +203,176 @@ def seq2seq_model(input_data, targets, lr, target_sequence_length,
 
 # 超参数
 # Number of Epochs
-epochs = 5
+epochs = 2
 # Batch Size
 batch_size = 128
 # RNN Size
-rnn_size = 50
+# rnn_size = 64
 # Number of Layers
-num_layers = 2
+# num_layers = 2
 # Embedding Size
 encoding_embedding_size = 15
 decoding_embedding_size = 15
 # Learning Rate
 learning_rate = 0.001
 # keep probility
-keep_prob = 1
+keep_prob = 0.8
+# max_layer
+max_layer = 20
 
-# 构造graph
-train_graph = tf.Graph()
+lstm_size_list = [32, 64, 96, 128, 160, 192, 224, 256, 288]
+for rnn_size in lstm_size_list:
+    out_file_name = "out_lstm_size_" + str(rnn_size) + ".txt"
+    f = open(out_file_name, "w+")
+    message = 'batch_size = '+batch_size.__str__()+'\nlstm_size = '+rnn_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
+    f.write(message)
+    f.close()
 
-with train_graph.as_default():
-    # 获得模型输入
-    input_data, targets, lr, target_sequence_length, max_target_sequence_length, source_sequence_length = get_inputs()
-    training_decoder_output, predicting_decoder_output = seq2seq_model(
-        input_data,
-        targets,
-        lr,
-        target_sequence_length,
-        max_target_sequence_length,
-        source_sequence_length,
-        len(sl2i),
-        len(tl2i),
-        encoding_embedding_size,
-        decoding_embedding_size,
-        rnn_size,
-        num_layers
-    )
-    training_logits = tf.identity(training_decoder_output.rnn_output, 'logits')
-    predicting_logits = tf.identity(predicting_decoder_output.sample_id, name='predictions')
+    for num_layers in range(1, max_layer + 1):
 
-    masks = tf.sequence_mask(target_sequence_length, max_target_sequence_length, dtype=tf.float32, name='masks')
+        f = open(out_file_name, "a+");
+        f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
+        f.close();
 
-    with tf.name_scope('optimiation'):
-        # Loss function
-        cost = tf.contrib.seq2seq.sequence_loss(
-            training_logits,
-            targets,
-            masks
-        )
+        # 构造graph
+        train_graph = tf.Graph()
 
-        # Optimizer
-        optimizer = tf.train.AdamOptimizer(lr)
+        with train_graph.as_default():
+            # 获得模型输入
+            input_data, targets, lr, target_sequence_length, max_target_sequence_length, source_sequence_length = get_inputs()
+            training_decoder_output, predicting_decoder_output = seq2seq_model(
+                input_data,
+                targets,
+                lr,
+                target_sequence_length,
+                max_target_sequence_length,
+                source_sequence_length,
+                len(sl2i),
+                len(tl2i),
+                encoding_embedding_size,
+                decoding_embedding_size,
+                rnn_size,
+                num_layers
+            )
+            training_logits = tf.identity(training_decoder_output.rnn_output, 'logits')
+            predicting_logits = tf.identity(predicting_decoder_output.sample_id, name='predictions')
 
-        # Gradient Clipping
-        gradients = optimizer.compute_gradients(cost)
-        capped_gradients = [(tf.clip_by_value(grad, -5.0, 5.0), var) for grad, var in gradients if grad is not None]
-        train_op = optimizer.apply_gradients(capped_gradients)
+            masks = tf.sequence_mask(target_sequence_length, max_target_sequence_length, dtype=tf.float32, name='masks')
 
-def pad_sentence_batch(sentence_batch, pad_int):
-    '''
-    对batch中的序列进行补全，保证batch中的每行都有相同的sequence_length
-    :param sentence_batch:
-    :param pad_int: <PAD>对应的索引号
-    :return:
-    '''
+            with tf.name_scope('optimiation'):
+                # Loss function
+                cost = tf.contrib.seq2seq.sequence_loss(
+                    training_logits,
+                    targets,
+                    masks
+                )
 
-    max_sentence = max([len(sentence) for sentence in sentence_batch])
-    return [sentence + [pad_int] * (max_sentence - len(sentence)) for sentence in sentence_batch]
+                # Optimizer
+                optimizer = tf.train.AdamOptimizer(lr)
 
-def get_batches(targets, sources, batch_size, source_pad_int, target_pad_int):
-    '''
-    定义生成器，用来获取batch
-    :param targets:
-    :param sources:
-    :param batch_size:
-    :param source_pad_int:
-    :param target_pad_int:
-    :return:
-    '''
+                # Gradient Clipping
+                gradients = optimizer.compute_gradients(cost)
+                capped_gradients = [(tf.clip_by_value(grad, -5.0, 5.0), var) for grad, var in gradients if grad is not None]
+                train_op = optimizer.apply_gradients(capped_gradients)
 
-    for batch_i in range(0, len(sources) // batch_size):
-        start_i = batch_i * batch_size
-        sources_batch = sources[start_i : start_i + batch_size]
-        targets_batch = targets[start_i : start_i + batch_size]
-        # 补全序列
-        pad_sources_batch = np.array(pad_sentence_batch(sources_batch, source_pad_int))
-        pad_targets_batch = np.array(pad_sentence_batch(targets_batch, target_pad_int))
+        def pad_sentence_batch(sentence_batch, pad_int):
+            '''
+            对batch中的序列进行补全，保证batch中的每行都有相同的sequence_length
+            :param sentence_batch:
+            :param pad_int: <PAD>对应的索引号
+            :return:
+            '''
 
-        #记录每条记录的长度
-        targets_lengths = []
-        for target in targets_batch:
-            targets_lengths.append(len(target))
+            max_sentence = max([len(sentence) for sentence in sentence_batch])
+            return [sentence + [pad_int] * (max_sentence - len(sentence)) for sentence in sentence_batch]
 
-        source_lengths = []
-        for source in sources_batch:
-            source_lengths.append(len(source))
+        def get_batches(targets, sources, batch_size, source_pad_int, target_pad_int):
+            '''
+            定义生成器，用来获取batch
+            :param targets:
+            :param sources:
+            :param batch_size:
+            :param source_pad_int:
+            :param target_pad_int:
+            :return:
+            '''
 
-        yield pad_targets_batch, pad_sources_batch, targets_lengths, source_lengths
+            for batch_i in range(0, len(sources) // batch_size):
+                start_i = batch_i * batch_size
+                sources_batch = sources[start_i : start_i + batch_size]
+                targets_batch = targets[start_i : start_i + batch_size]
+                # 补全序列
+                pad_sources_batch = np.array(pad_sentence_batch(sources_batch, source_pad_int))
+                pad_targets_batch = np.array(pad_sentence_batch(targets_batch, target_pad_int))
 
-# Train
-# 将数据集分割为train和validation
-train_source = source_int[batch_size:]
-train_target = target_int[batch_size:]
-# 留出一个batch用作validation
-valid_source = source_int[:batch_size]
-valid_target = target_int[:batch_size]
-(valid_targets_batch, valid_sources_batch, valid_targets_lengths, valid_sources_lengths) = \
-    next(get_batches(valid_target, valid_source, batch_size, sl2i['<PAD>'], tl2i['<PAD>']))
+                #记录每条记录的长度
+                targets_lengths = []
+                for target in targets_batch:
+                    targets_lengths.append(len(target))
 
-display_step = 50 # 每50轮输出loss
+                source_lengths = []
+                for source in sources_batch:
+                    source_lengths.append(len(source))
 
-checkpoint = 'trained_model.ckpt'
+                yield pad_targets_batch, pad_sources_batch, targets_lengths, source_lengths
+
+        # Train
+
+        # 将数据集分割为train和validation
+        train_source = source_int[batch_size:]
+        train_target = target_int[batch_size:]
+        # 留出一个batch用作validation
+        valid_source = source_int[:batch_size]
+        valid_target = target_int[:batch_size]
+        (valid_targets_batch, valid_sources_batch, valid_targets_lengths, valid_sources_lengths) = \
+            next(get_batches(valid_target, valid_source, batch_size, sl2i['<PAD>'], tl2i['<PAD>']))
+
+        display_step = 50 # 每50轮输出loss
+
+        checkpoint = 'trained_model.ckpt'
 
 
-with tf.Session(graph=train_graph) as sess:
-    sess.run(tf.global_variables_initializer())
-    for epoch_i in range(1, epochs + 1):
-        for batch_i, (targets_batch, sources_batch, targets_lengths, sources_lengths) in enumerate(
-            get_batches(train_target, train_source, batch_size, sl2i['<PAD>'], tl2i['<PAD>'])):
+        with tf.Session(graph=train_graph) as sess:
+            sess.run(tf.global_variables_initializer())
+            for epoch_i in range(1, epochs + 1):
+                for batch_i, (targets_batch, sources_batch, targets_lengths, sources_lengths) in enumerate(
+                    get_batches(train_target, train_source, batch_size, sl2i['<PAD>'], tl2i['<PAD>'])):
 
-            _, loss = sess.run([train_op, cost],
-                               feed_dict={
-                                   input_data: sources_batch,
-                                   targets:targets_batch,
-                                   lr: learning_rate,
-                                   target_sequence_length: targets_lengths,
-                                   source_sequence_length: sources_lengths
-                               })
-
-            if batch_i % display_step == 0:
-                # 计算validation loss
-                validation_loss = sess.run(
-                    [cost], feed_dict={
-                        input_data: valid_sources_batch,
-                        targets: valid_targets_batch,
-                        lr: learning_rate,
-                        target_sequence_length: valid_targets_lengths,
-                        source_sequence_length: valid_sources_lengths
-                    })
-                print('Epoch {:>3}/{} Batch {:>4}/{} - Training Loss: {:>6.3f}  - Validation loss: {:>6.3f}'
-                      .format(epoch_i,
-                              epochs,
-                              batch_i,
-                              len(train_source) // batch_size,
-                              loss,
-                              validation_loss[0]))
-    # saver = tf.train.Saver()
-    # saver.save(sess, './' + checkpoint)
-    # print('Model Trained and Saved')
+                    start_time = time.time()
+                    _, loss = sess.run([train_op, cost],
+                                       feed_dict={
+                                           input_data: sources_batch,
+                                           targets:targets_batch,
+                                           lr: learning_rate,
+                                           target_sequence_length: targets_lengths,
+                                           source_sequence_length: sources_lengths
+                                       })
+                    end_time = time.time()
+                    if batch_i % display_step == 0:
+                        # 计算validation loss
+                        validation_loss = sess.run(
+                            [cost], feed_dict={
+                                input_data: valid_sources_batch,
+                                targets: valid_targets_batch,
+                                lr: learning_rate,
+                                target_sequence_length: valid_targets_lengths,
+                                source_sequence_length: valid_sources_lengths
+                            })
+                        msg = 'Epoch {:>3}/{} Batch {:>4}/{} - Training Loss: {:>6.3f}  ' \
+                              '- Validation loss: {:>6.3f} {:.4f} sec/batch'\
+                            .format(epoch_i,
+                                      epochs,
+                                      batch_i,
+                                      len(train_source) // batch_size,
+                                      loss,
+                                      validation_loss[0], end_time - start_time)
+                        print(msg)
+                        f = open(out_file_name, "a+");
+                        f.write(msg + '\n')
+                        f.close();
+        # saver = tf.train.Saver()
+        # saver.save(sess, './' + checkpoint)
+        # print('Model Trained and Saved')
 
 # def source_to_seq(text):
 #     '''
