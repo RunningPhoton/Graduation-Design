@@ -42,7 +42,7 @@ def built_lstm(input_data, weights_in, weights_out, bias_in, bias_out):
     # 进行数据处理, 一个输入数据格式是batch_size * time_step * input_x
     x_in = tf.reshape(input_data, [-1, input_x])
     x_in = tf.matmul(x_in, weights_in) + bias_in
-    x_in = tf.reshape(x_in, [-1, time_steps, rnn_size])
+    x_in = tf.reshape(x_in, [time_steps, batch_size, rnn_size])
     # RNN cell
     def get_lstm_cell(rnn_size):
         lstm_cell = tf.contrib.rnn.LSTMCell(
@@ -50,9 +50,9 @@ def built_lstm(input_data, weights_in, weights_out, bias_in, bias_out):
         drop = tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob=keep_prob)
         return drop
     multiple_cell = tf.contrib.rnn.MultiRNNCell([get_lstm_cell(rnn_size) for _ in range(num_layers)])
-    # init_state = multiple_cell.zero_state(batch_size, tf.float32)
+    init_state = multiple_cell.zero_state(batch_size, tf.float32)
     lstm_output, lstm_state = tf.nn.dynamic_rnn(
-        multiple_cell, x_in, time_major=False, dtype=tf.float32)
+        multiple_cell, x_in, initial_state=init_state, time_major=True, dtype=tf.float32)
     # 选择lstm_output最后一个输出
     output = tf.add(tf.matmul(lstm_output[-1], weights_out), bias_out)
     return output
