@@ -203,7 +203,7 @@ def seq2seq_model(input_data, targets, lr, target_sequence_length,
 
 # 超参数
 # Number of Epochs
-epochs = 2
+epochs = 50
 # Batch Size
 batch_size = 128
 # RNN Size
@@ -218,9 +218,9 @@ learning_rate = 0.001
 # keep probility
 keep_prob = 0.8
 # max_layer
-max_layer = 20
+max_layer = 12
 
-lstm_size_list = [32, 64, 96, 128, 160, 192, 224, 256, 288]
+lstm_size_list = [32, 64, 96, 128, 160, 192]
 for rnn_size in lstm_size_list:
     out_file_name = "out_lstm_size_" + str(rnn_size) + ".txt"
     f = open(out_file_name, "w+")
