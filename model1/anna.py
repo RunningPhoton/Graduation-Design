@@ -295,9 +295,9 @@ f.write(message)
 f.close()
 for num_layers in range(1, 14 + 1):
 
-    f = open(out_file_name, "a+");
-    f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
-    f.close();
+    # f = open(out_file_name, "a+");
+    # f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
+    # f.close()
     epochs = 40
     # 每n轮进行一次变量保存
     save_every_n = 200
@@ -335,9 +335,9 @@ for num_layers in range(1, 14 + 1):
                           '训练误差: {:.4f}... '.format(batch_loss) + \
                           '{:.4f} sec/batch'.format(end - start)
                     print(msg)
-                    f = open(out_file_name, "a+");
-                    f.write(msg+'\n')
-                    f.close();
+                    # f = open(out_file_name, "a+");
+                    # f.write(msg+'\n')
+                    # f.close();
 
     #             if (counter % save_every_n == 0):
     #                 saver.save(sess, "checkpoints/i{}_l{}.ckpt".format(counter, lstm_size))
