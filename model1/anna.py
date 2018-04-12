@@ -282,7 +282,7 @@ class CharRNN:
 
 batch_size = 100  # Sequences per batch
 num_steps = 100  # Number of sequence steps per batch
-lstm_size = 192  # Size of hidden layers in LSTMs
+lstm_size = 448  # Size of hidden layers in LSTMs
 # num_layers = 3  # Number of LSTM layers
 learning_rate = 0.001  # Learning rate
 keep_prob = 0.5  # Dropout keep probability
@@ -293,7 +293,7 @@ f = open(out_file_name, "w+");
 message = 'batch_size = '+batch_size.__str__()+'\nnum_steps = '+num_steps.__str__()+'\nlstm_size = '+lstm_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
 f.write(message)
 f.close()
-for num_layers in range(1, 20):
+for num_layers in range(1, 14 + 1):
 
     f = open(out_file_name, "a+");
     f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
