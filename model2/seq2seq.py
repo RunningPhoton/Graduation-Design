@@ -220,15 +220,16 @@ keep_prob = 0.8
 # max_layer
 max_layer = 12
 
-lstm_size_list = [32, 64, 96, 128, 160, 192]
+# lstm_size_list = [32, 64, 96, 128, 160, 192]
+lstm_size_list = [96]
 for rnn_size in lstm_size_list:
     out_file_name = "out_lstm_size_" + str(rnn_size) + ".txt"
-    f = open(out_file_name, "w+")
-    message = 'batch_size = '+batch_size.__str__()+'\nlstm_size = '+rnn_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
-    f.write(message)
-    f.close()
+    # f = open(out_file_name, "w+")
+    # message = 'batch_size = '+batch_size.__str__()+'\nlstm_size = '+rnn_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
+    # f.write(message)
+    # f.close()
 
-    for num_layers in range(1, max_layer + 1):
+    for num_layers in range(5, max_layer + 1):
 
         f = open(out_file_name, "a+");
         f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
