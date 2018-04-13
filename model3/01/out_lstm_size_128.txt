@@ -1,0 +1,278 @@
+batch_size = 128
+lstm_size = 128
+learning_rate = 0.001
+当前隐藏层layer数量： 1
+Epoch 100/2000 - Training Loss: 0.056550 - Training Accuracy: 0.804688 - Validation loss: 0.064636 - Validation Accuracy: 0.765625
+Epoch 200/2000 - Training Loss: 0.028355 - Training Accuracy: 0.898438 - Validation loss: 0.037113 - Validation Accuracy: 0.929688
+Epoch 300/2000 - Training Loss: 0.027331 - Training Accuracy: 0.937500 - Validation loss: 0.021434 - Validation Accuracy: 0.921875
+Epoch 400/2000 - Training Loss: 0.024344 - Training Accuracy: 0.929688 - Validation loss: 0.023165 - Validation Accuracy: 0.937500
+Epoch 500/2000 - Training Loss: 0.027647 - Training Accuracy: 0.906250 - Validation loss: 0.024033 - Validation Accuracy: 0.921875
+Epoch 600/2000 - Training Loss: 0.019702 - Training Accuracy: 0.953125 - Validation loss: 0.015100 - Validation Accuracy: 0.945312
+Epoch 700/2000 - Training Loss: 0.011198 - Training Accuracy: 0.953125 - Validation loss: 0.013703 - Validation Accuracy: 0.968750
+Epoch 800/2000 - Training Loss: 0.014108 - Training Accuracy: 0.945312 - Validation loss: 0.012996 - Validation Accuracy: 0.937500
+Epoch 900/2000 - Training Loss: 0.015119 - Training Accuracy: 0.960938 - Validation loss: 0.012077 - Validation Accuracy: 0.960938
+Epoch 1000/2000 - Training Loss: 0.014470 - Training Accuracy: 0.960938 - Validation loss: 0.008556 - Validation Accuracy: 0.968750
+Epoch 1100/2000 - Training Loss: 0.005406 - Training Accuracy: 0.992188 - Validation loss: 0.006017 - Validation Accuracy: 0.968750
+Epoch 1200/2000 - Training Loss: 0.014190 - Training Accuracy: 0.953125 - Validation loss: 0.006687 - Validation Accuracy: 0.984375
+Epoch 1300/2000 - Training Loss: 0.003115 - Training Accuracy: 0.992188 - Validation loss: 0.005237 - Validation Accuracy: 0.976562
+Epoch 1400/2000 - Training Loss: 0.012758 - Training Accuracy: 0.968750 - Validation loss: 0.019039 - Validation Accuracy: 0.937500
+Epoch 1500/2000 - Training Loss: 0.009777 - Training Accuracy: 0.976562 - Validation loss: 0.006853 - Validation Accuracy: 0.976562
+Epoch 1600/2000 - Training Loss: 0.005961 - Training Accuracy: 0.984375 - Validation loss: 0.009238 - Validation Accuracy: 0.968750
+Epoch 1700/2000 - Training Loss: 0.011971 - Training Accuracy: 0.953125 - Validation loss: 0.006926 - Validation Accuracy: 0.984375
+Epoch 1800/2000 - Training Loss: 0.004337 - Training Accuracy: 0.984375 - Validation loss: 0.005238 - Validation Accuracy: 0.976562
+Epoch 1900/2000 - Training Loss: 0.006448 - Training Accuracy: 0.976562 - Validation loss: 0.012281 - Validation Accuracy: 0.960938
+Epoch 2000/2000 - Training Loss: 0.008144 - Training Accuracy: 0.968750 - Validation loss: 0.012039 - Validation Accuracy: 0.953125
+lstm_size: 128 - layer_num: 1 test_accuracy: 0.976000189781189
+
+当前隐藏层layer数量： 2
+Epoch 100/2000 - Training Loss: 0.070576 - Training Accuracy: 0.781250 - Validation loss: 0.072744 - Validation Accuracy: 0.742188
+Epoch 200/2000 - Training Loss: 0.039501 - Training Accuracy: 0.882812 - Validation loss: 0.034550 - Validation Accuracy: 0.921875
+Epoch 300/2000 - Training Loss: 0.028745 - Training Accuracy: 0.921875 - Validation loss: 0.021659 - Validation Accuracy: 0.937500
+Epoch 400/2000 - Training Loss: 0.029894 - Training Accuracy: 0.929688 - Validation loss: 0.015888 - Validation Accuracy: 0.937500
+Epoch 500/2000 - Training Loss: 0.025525 - Training Accuracy: 0.906250 - Validation loss: 0.027574 - Validation Accuracy: 0.937500
+Epoch 600/2000 - Training Loss: 0.009476 - Training Accuracy: 0.976562 - Validation loss: 0.010119 - Validation Accuracy: 0.968750
+Epoch 700/2000 - Training Loss: 0.013765 - Training Accuracy: 0.960938 - Validation loss: 0.007496 - Validation Accuracy: 0.976562
+Epoch 800/2000 - Training Loss: 0.008740 - Training Accuracy: 0.968750 - Validation loss: 0.007983 - Validation Accuracy: 0.984375
+Epoch 900/2000 - Training Loss: 0.003919 - Training Accuracy: 0.984375 - Validation loss: 0.007308 - Validation Accuracy: 0.984375
+Epoch 1000/2000 - Training Loss: 0.012819 - Training Accuracy: 0.945312 - Validation loss: 0.011187 - Validation Accuracy: 0.960938
+Epoch 1100/2000 - Training Loss: 0.004517 - Training Accuracy: 0.992188 - Validation loss: 0.005776 - Validation Accuracy: 0.984375
+Epoch 1200/2000 - Training Loss: 0.011804 - Training Accuracy: 0.945312 - Validation loss: 0.011873 - Validation Accuracy: 0.960938
+Epoch 1300/2000 - Training Loss: 0.007682 - Training Accuracy: 0.992188 - Validation loss: 0.006672 - Validation Accuracy: 0.976562
+Epoch 1400/2000 - Training Loss: 0.006773 - Training Accuracy: 0.992188 - Validation loss: 0.014917 - Validation Accuracy: 0.968750
+Epoch 1500/2000 - Training Loss: 0.008373 - Training Accuracy: 0.968750 - Validation loss: 0.010184 - Validation Accuracy: 0.976562
+Epoch 1600/2000 - Training Loss: 0.007099 - Training Accuracy: 0.968750 - Validation loss: 0.001749 - Validation Accuracy: 0.992188
+Epoch 1700/2000 - Training Loss: 0.009549 - Training Accuracy: 0.976562 - Validation loss: 0.004476 - Validation Accuracy: 0.984375
+Epoch 1800/2000 - Training Loss: 0.006810 - Training Accuracy: 0.976562 - Validation loss: 0.012328 - Validation Accuracy: 0.960938
+Epoch 1900/2000 - Training Loss: 0.009445 - Training Accuracy: 0.953125 - Validation loss: 0.004859 - Validation Accuracy: 0.992188
+Epoch 2000/2000 - Training Loss: 0.001826 - Training Accuracy: 1.000000 - Validation loss: 0.005068 - Validation Accuracy: 0.984375
+lstm_size: 128 - layer_num: 2 test_accuracy: 0.9821001291275024
+
+当前隐藏层layer数量： 3
+Epoch 100/2000 - Training Loss: 0.056987 - Training Accuracy: 0.781250 - Validation loss: 0.054074 - Validation Accuracy: 0.835938
+Epoch 200/2000 - Training Loss: 0.032761 - Training Accuracy: 0.906250 - Validation loss: 0.040149 - Validation Accuracy: 0.859375
+Epoch 300/2000 - Training Loss: 0.022116 - Training Accuracy: 0.929688 - Validation loss: 0.010951 - Validation Accuracy: 0.976562
+Epoch 400/2000 - Training Loss: 0.016555 - Training Accuracy: 0.953125 - Validation loss: 0.015644 - Validation Accuracy: 0.960938
+Epoch 500/2000 - Training Loss: 0.022185 - Training Accuracy: 0.953125 - Validation loss: 0.012294 - Validation Accuracy: 0.937500
+Epoch 600/2000 - Training Loss: 0.024472 - Training Accuracy: 0.945312 - Validation loss: 0.017835 - Validation Accuracy: 0.945312
+Epoch 700/2000 - Training Loss: 0.022290 - Training Accuracy: 0.953125 - Validation loss: 0.018229 - Validation Accuracy: 0.945312
+Epoch 800/2000 - Training Loss: 0.008205 - Training Accuracy: 0.984375 - Validation loss: 0.014783 - Validation Accuracy: 0.945312
+Epoch 900/2000 - Training Loss: 0.011952 - Training Accuracy: 0.953125 - Validation loss: 0.011249 - Validation Accuracy: 0.960938
+Epoch 1000/2000 - Training Loss: 0.006233 - Training Accuracy: 0.984375 - Validation loss: 0.005959 - Validation Accuracy: 0.976562
+Epoch 1100/2000 - Training Loss: 0.008016 - Training Accuracy: 0.976562 - Validation loss: 0.013912 - Validation Accuracy: 0.953125
+Epoch 1200/2000 - Training Loss: 0.004774 - Training Accuracy: 0.968750 - Validation loss: 0.011091 - Validation Accuracy: 0.960938
+Epoch 1300/2000 - Training Loss: 0.004935 - Training Accuracy: 0.976562 - Validation loss: 0.005366 - Validation Accuracy: 0.984375
+Epoch 1400/2000 - Training Loss: 0.006866 - Training Accuracy: 0.960938 - Validation loss: 0.004068 - Validation Accuracy: 0.992188
+Epoch 1500/2000 - Training Loss: 0.010922 - Training Accuracy: 0.976562 - Validation loss: 0.002150 - Validation Accuracy: 0.992188
+Epoch 1600/2000 - Training Loss: 0.007977 - Training Accuracy: 0.984375 - Validation loss: 0.005386 - Validation Accuracy: 0.992188
+Epoch 1700/2000 - Training Loss: 0.015510 - Training Accuracy: 0.960938 - Validation loss: 0.003683 - Validation Accuracy: 0.992188
+Epoch 1800/2000 - Training Loss: 0.010180 - Training Accuracy: 0.976562 - Validation loss: 0.005130 - Validation Accuracy: 0.984375
+Epoch 1900/2000 - Training Loss: 0.002557 - Training Accuracy: 0.984375 - Validation loss: 0.008467 - Validation Accuracy: 0.968750
+Epoch 2000/2000 - Training Loss: 0.002364 - Training Accuracy: 0.992188 - Validation loss: 0.002928 - Validation Accuracy: 0.992188
+lstm_size: 128 - layer_num: 3 test_accuracy: 0.9833001494407654
+
+当前隐藏层layer数量： 4
+Epoch 100/2000 - Training Loss: 0.082978 - Training Accuracy: 0.765625 - Validation loss: 0.048911 - Validation Accuracy: 0.867188
+Epoch 200/2000 - Training Loss: 0.042654 - Training Accuracy: 0.875000 - Validation loss: 0.045023 - Validation Accuracy: 0.835938
+Epoch 300/2000 - Training Loss: 0.020376 - Training Accuracy: 0.945312 - Validation loss: 0.018076 - Validation Accuracy: 0.945312
+Epoch 400/2000 - Training Loss: 0.019403 - Training Accuracy: 0.945312 - Validation loss: 0.021739 - Validation Accuracy: 0.945312
+Epoch 500/2000 - Training Loss: 0.014052 - Training Accuracy: 0.960938 - Validation loss: 0.014731 - Validation Accuracy: 0.968750
+Epoch 600/2000 - Training Loss: 0.021227 - Training Accuracy: 0.945312 - Validation loss: 0.013250 - Validation Accuracy: 0.960938
+Epoch 700/2000 - Training Loss: 0.008094 - Training Accuracy: 0.984375 - Validation loss: 0.008815 - Validation Accuracy: 0.984375
+Epoch 800/2000 - Training Loss: 0.020740 - Training Accuracy: 0.953125 - Validation loss: 0.009115 - Validation Accuracy: 0.984375
+Epoch 900/2000 - Training Loss: 0.009467 - Training Accuracy: 0.976562 - Validation loss: 0.011279 - Validation Accuracy: 0.976562
+Epoch 1000/2000 - Training Loss: 0.010673 - Training Accuracy: 0.968750 - Validation loss: 0.011807 - Validation Accuracy: 0.960938
+Epoch 1100/2000 - Training Loss: 0.014052 - Training Accuracy: 0.953125 - Validation loss: 0.013134 - Validation Accuracy: 0.976562
+Epoch 1200/2000 - Training Loss: 0.009172 - Training Accuracy: 0.960938 - Validation loss: 0.004207 - Validation Accuracy: 0.992188
+Epoch 1300/2000 - Training Loss: 0.001984 - Training Accuracy: 1.000000 - Validation loss: 0.007876 - Validation Accuracy: 0.976562
+Epoch 1400/2000 - Training Loss: 0.006748 - Training Accuracy: 0.992188 - Validation loss: 0.007978 - Validation Accuracy: 0.984375
+Epoch 1500/2000 - Training Loss: 0.007138 - Training Accuracy: 0.976562 - Validation loss: 0.006934 - Validation Accuracy: 0.976562
+Epoch 1600/2000 - Training Loss: 0.005304 - Training Accuracy: 0.992188 - Validation loss: 0.002767 - Validation Accuracy: 0.984375
+Epoch 1700/2000 - Training Loss: 0.003375 - Training Accuracy: 0.976562 - Validation loss: 0.003101 - Validation Accuracy: 0.992188
+Epoch 1800/2000 - Training Loss: 0.009692 - Training Accuracy: 0.984375 - Validation loss: 0.004718 - Validation Accuracy: 0.992188
+Epoch 1900/2000 - Training Loss: 0.002177 - Training Accuracy: 0.992188 - Validation loss: 0.010083 - Validation Accuracy: 0.976562
+Epoch 2000/2000 - Training Loss: 0.001471 - Training Accuracy: 1.000000 - Validation loss: 0.004897 - Validation Accuracy: 0.992188
+lstm_size: 128 - layer_num: 4 test_accuracy: 0.9832000732421875
+
+当前隐藏层layer数量： 6
+Epoch 100/2000 - Training Loss: 0.073511 - Training Accuracy: 0.773438 - Validation loss: 0.058417 - Validation Accuracy: 0.796875
+Epoch 200/2000 - Training Loss: 0.046039 - Training Accuracy: 0.843750 - Validation loss: 0.045489 - Validation Accuracy: 0.875000
+Epoch 300/2000 - Training Loss: 0.050093 - Training Accuracy: 0.804688 - Validation loss: 0.037184 - Validation Accuracy: 0.914062
+Epoch 400/2000 - Training Loss: 0.029187 - Training Accuracy: 0.914062 - Validation loss: 0.030064 - Validation Accuracy: 0.914062
+Epoch 500/2000 - Training Loss: 0.016116 - Training Accuracy: 0.953125 - Validation loss: 0.017567 - Validation Accuracy: 0.953125
+Epoch 600/2000 - Training Loss: 0.035562 - Training Accuracy: 0.890625 - Validation loss: 0.022743 - Validation Accuracy: 0.929688
+Epoch 700/2000 - Training Loss: 0.021376 - Training Accuracy: 0.937500 - Validation loss: 0.012986 - Validation Accuracy: 0.968750
+Epoch 800/2000 - Training Loss: 0.017228 - Training Accuracy: 0.945312 - Validation loss: 0.014038 - Validation Accuracy: 0.953125
+Epoch 900/2000 - Training Loss: 0.015307 - Training Accuracy: 0.960938 - Validation loss: 0.007259 - Validation Accuracy: 0.984375
+Epoch 1000/2000 - Training Loss: 0.005281 - Training Accuracy: 0.984375 - Validation loss: 0.016978 - Validation Accuracy: 0.953125
+Epoch 1100/2000 - Training Loss: 0.013492 - Training Accuracy: 0.968750 - Validation loss: 0.005823 - Validation Accuracy: 0.992188
+Epoch 1200/2000 - Training Loss: 0.005464 - Training Accuracy: 0.976562 - Validation loss: 0.011615 - Validation Accuracy: 0.976562
+Epoch 1300/2000 - Training Loss: 0.005286 - Training Accuracy: 0.984375 - Validation loss: 0.003105 - Validation Accuracy: 0.992188
+Epoch 1400/2000 - Training Loss: 0.019100 - Training Accuracy: 0.953125 - Validation loss: 0.009306 - Validation Accuracy: 0.968750
+Epoch 1500/2000 - Training Loss: 0.010302 - Training Accuracy: 0.968750 - Validation loss: 0.007454 - Validation Accuracy: 0.976562
+Epoch 1600/2000 - Training Loss: 0.005890 - Training Accuracy: 0.992188 - Validation loss: 0.012020 - Validation Accuracy: 0.976562
+Epoch 1700/2000 - Training Loss: 0.003079 - Training Accuracy: 0.992188 - Validation loss: 0.013282 - Validation Accuracy: 0.953125
+Epoch 1800/2000 - Training Loss: 0.002694 - Training Accuracy: 0.992188 - Validation loss: 0.010163 - Validation Accuracy: 0.960938
+Epoch 1900/2000 - Training Loss: 0.004116 - Training Accuracy: 0.976562 - Validation loss: 0.006196 - Validation Accuracy: 0.968750
+Epoch 2000/2000 - Training Loss: 0.017236 - Training Accuracy: 0.937500 - Validation loss: 0.007236 - Validation Accuracy: 0.976562
+lstm_size: 128 - layer_num: 6 test_accuracy: 0.9795000553131104
+
+当前隐藏层layer数量： 8
+Epoch 100/2000 - Training Loss: 0.087711 - Training Accuracy: 0.710938 - Validation loss: 0.076122 - Validation Accuracy: 0.726562
+Epoch 200/2000 - Training Loss: 0.069047 - Training Accuracy: 0.734375 - Validation loss: 0.056306 - Validation Accuracy: 0.835938
+Epoch 300/2000 - Training Loss: 0.054566 - Training Accuracy: 0.820312 - Validation loss: 0.063144 - Validation Accuracy: 0.789062
+Epoch 400/2000 - Training Loss: 0.041699 - Training Accuracy: 0.875000 - Validation loss: 0.036516 - Validation Accuracy: 0.890625
+Epoch 500/2000 - Training Loss: 0.047361 - Training Accuracy: 0.843750 - Validation loss: 0.032858 - Validation Accuracy: 0.875000
+Epoch 600/2000 - Training Loss: 0.027726 - Training Accuracy: 0.937500 - Validation loss: 0.027568 - Validation Accuracy: 0.898438
+Epoch 700/2000 - Training Loss: 0.029259 - Training Accuracy: 0.921875 - Validation loss: 0.041466 - Validation Accuracy: 0.882812
+Epoch 800/2000 - Training Loss: 0.021010 - Training Accuracy: 0.945312 - Validation loss: 0.028818 - Validation Accuracy: 0.929688
+Epoch 900/2000 - Training Loss: 0.018362 - Training Accuracy: 0.953125 - Validation loss: 0.007040 - Validation Accuracy: 0.976562
+Epoch 1000/2000 - Training Loss: 0.012475 - Training Accuracy: 0.960938 - Validation loss: 0.014529 - Validation Accuracy: 0.968750
+Epoch 1100/2000 - Training Loss: 0.017516 - Training Accuracy: 0.945312 - Validation loss: 0.014346 - Validation Accuracy: 0.976562
+Epoch 1200/2000 - Training Loss: 0.013248 - Training Accuracy: 0.960938 - Validation loss: 0.018102 - Validation Accuracy: 0.960938
+Epoch 1300/2000 - Training Loss: 0.013169 - Training Accuracy: 0.953125 - Validation loss: 0.023593 - Validation Accuracy: 0.945312
+Epoch 1400/2000 - Training Loss: 0.012383 - Training Accuracy: 0.960938 - Validation loss: 0.009038 - Validation Accuracy: 0.960938
+Epoch 1500/2000 - Training Loss: 0.002175 - Training Accuracy: 0.992188 - Validation loss: 0.006282 - Validation Accuracy: 0.984375
+Epoch 1600/2000 - Training Loss: 0.006739 - Training Accuracy: 0.984375 - Validation loss: 0.012143 - Validation Accuracy: 0.960938
+Epoch 1700/2000 - Training Loss: 0.012976 - Training Accuracy: 0.953125 - Validation loss: 0.012198 - Validation Accuracy: 0.968750
+Epoch 1800/2000 - Training Loss: 0.005508 - Training Accuracy: 0.968750 - Validation loss: 0.021659 - Validation Accuracy: 0.937500
+Epoch 1900/2000 - Training Loss: 0.008421 - Training Accuracy: 0.992188 - Validation loss: 0.013536 - Validation Accuracy: 0.960938
+Epoch 2000/2000 - Training Loss: 0.003044 - Training Accuracy: 0.984375 - Validation loss: 0.005801 - Validation Accuracy: 0.976562
+lstm_size: 128 - layer_num: 8 test_accuracy: 0.97350013256073
+
+当前隐藏层layer数量： 10
+Epoch 100/2000 - Training Loss: 0.147189 - Training Accuracy: 0.492188 - Validation loss: 0.144861 - Validation Accuracy: 0.500000
+Epoch 200/2000 - Training Loss: 0.127546 - Training Accuracy: 0.515625 - Validation loss: 0.144296 - Validation Accuracy: 0.492188
+Epoch 300/2000 - Training Loss: 0.129584 - Training Accuracy: 0.531250 - Validation loss: 0.121797 - Validation Accuracy: 0.562500
+Epoch 400/2000 - Training Loss: 0.122205 - Training Accuracy: 0.562500 - Validation loss: 0.116160 - Validation Accuracy: 0.625000
+Epoch 500/2000 - Training Loss: 0.090435 - Training Accuracy: 0.664062 - Validation loss: 0.103122 - Validation Accuracy: 0.593750
+Epoch 600/2000 - Training Loss: 0.089891 - Training Accuracy: 0.718750 - Validation loss: 0.084570 - Validation Accuracy: 0.695312
+Epoch 700/2000 - Training Loss: 0.082146 - Training Accuracy: 0.742188 - Validation loss: 0.058559 - Validation Accuracy: 0.796875
+Epoch 800/2000 - Training Loss: 0.057816 - Training Accuracy: 0.804688 - Validation loss: 0.061450 - Validation Accuracy: 0.804688
+Epoch 900/2000 - Training Loss: 0.083715 - Training Accuracy: 0.726562 - Validation loss: 0.042384 - Validation Accuracy: 0.859375
+Epoch 1000/2000 - Training Loss: 0.039057 - Training Accuracy: 0.859375 - Validation loss: 0.040774 - Validation Accuracy: 0.906250
+Epoch 1100/2000 - Training Loss: 0.042468 - Training Accuracy: 0.851562 - Validation loss: 0.045713 - Validation Accuracy: 0.828125
+Epoch 1200/2000 - Training Loss: 0.046396 - Training Accuracy: 0.851562 - Validation loss: 0.039912 - Validation Accuracy: 0.875000
+Epoch 1300/2000 - Training Loss: 0.047482 - Training Accuracy: 0.835938 - Validation loss: 0.044456 - Validation Accuracy: 0.875000
+Epoch 1400/2000 - Training Loss: 0.035586 - Training Accuracy: 0.898438 - Validation loss: 0.034968 - Validation Accuracy: 0.851562
+Epoch 1500/2000 - Training Loss: 0.034401 - Training Accuracy: 0.914062 - Validation loss: 0.027697 - Validation Accuracy: 0.921875
+Epoch 1600/2000 - Training Loss: 0.024667 - Training Accuracy: 0.937500 - Validation loss: 0.034423 - Validation Accuracy: 0.914062
+Epoch 1700/2000 - Training Loss: 0.017802 - Training Accuracy: 0.945312 - Validation loss: 0.035171 - Validation Accuracy: 0.898438
+Epoch 1800/2000 - Training Loss: 0.032722 - Training Accuracy: 0.898438 - Validation loss: 0.025052 - Validation Accuracy: 0.945312
+Epoch 1900/2000 - Training Loss: 0.028786 - Training Accuracy: 0.929688 - Validation loss: 0.023756 - Validation Accuracy: 0.898438
+Epoch 2000/2000 - Training Loss: 0.024333 - Training Accuracy: 0.953125 - Validation loss: 0.021817 - Validation Accuracy: 0.921875
+lstm_size: 128 - layer_num: 10 test_accuracy: 0.918700098991394
+
+当前隐藏层layer数量： 12
+Epoch 100/2000 - Training Loss: 0.182898 - Training Accuracy: 0.304688 - Validation loss: 0.181899 - Validation Accuracy: 0.265625
+Epoch 200/2000 - Training Loss: 0.155235 - Training Accuracy: 0.359375 - Validation loss: 0.158379 - Validation Accuracy: 0.359375
+Epoch 300/2000 - Training Loss: 0.152196 - Training Accuracy: 0.398438 - Validation loss: 0.137759 - Validation Accuracy: 0.460938
+Epoch 400/2000 - Training Loss: 0.149745 - Training Accuracy: 0.460938 - Validation loss: 0.142133 - Validation Accuracy: 0.484375
+Epoch 500/2000 - Training Loss: 0.139237 - Training Accuracy: 0.414062 - Validation loss: 0.141112 - Validation Accuracy: 0.460938
+Epoch 600/2000 - Training Loss: 0.137716 - Training Accuracy: 0.468750 - Validation loss: 0.116842 - Validation Accuracy: 0.585938
+Epoch 700/2000 - Training Loss: 0.135577 - Training Accuracy: 0.515625 - Validation loss: 0.115175 - Validation Accuracy: 0.656250
+Epoch 800/2000 - Training Loss: 0.120365 - Training Accuracy: 0.578125 - Validation loss: 0.117597 - Validation Accuracy: 0.484375
+Epoch 900/2000 - Training Loss: 0.097943 - Training Accuracy: 0.617188 - Validation loss: 0.087369 - Validation Accuracy: 0.648438
+Epoch 1000/2000 - Training Loss: 0.103989 - Training Accuracy: 0.609375 - Validation loss: 0.105464 - Validation Accuracy: 0.617188
+Epoch 1100/2000 - Training Loss: 0.094603 - Training Accuracy: 0.679688 - Validation loss: 0.097216 - Validation Accuracy: 0.687500
+Epoch 1200/2000 - Training Loss: 0.080729 - Training Accuracy: 0.718750 - Validation loss: 0.069587 - Validation Accuracy: 0.781250
+Epoch 1300/2000 - Training Loss: 0.094346 - Training Accuracy: 0.718750 - Validation loss: 0.081069 - Validation Accuracy: 0.726562
+Epoch 1400/2000 - Training Loss: 0.092128 - Training Accuracy: 0.695312 - Validation loss: 0.076106 - Validation Accuracy: 0.765625
+Epoch 1500/2000 - Training Loss: 0.071802 - Training Accuracy: 0.757812 - Validation loss: 0.079145 - Validation Accuracy: 0.781250
+Epoch 1600/2000 - Training Loss: 0.095049 - Training Accuracy: 0.703125 - Validation loss: 0.080781 - Validation Accuracy: 0.757812
+Epoch 1700/2000 - Training Loss: 0.075338 - Training Accuracy: 0.796875 - Validation loss: 0.056979 - Validation Accuracy: 0.828125
+Epoch 1800/2000 - Training Loss: 0.057068 - Training Accuracy: 0.820312 - Validation loss: 0.058795 - Validation Accuracy: 0.757812
+Epoch 1900/2000 - Training Loss: 0.069950 - Training Accuracy: 0.796875 - Validation loss: 0.050966 - Validation Accuracy: 0.843750
+Epoch 2000/2000 - Training Loss: 0.058310 - Training Accuracy: 0.828125 - Validation loss: 0.055242 - Validation Accuracy: 0.820312
+lstm_size: 128 - layer_num: 12 test_accuracy: 0.8047000169754028
+
+当前隐藏层layer数量： 14
+Epoch 100/2000 - Training Loss: 0.190336 - Training Accuracy: 0.250000 - Validation loss: 0.171943 - Validation Accuracy: 0.250000
+Epoch 200/2000 - Training Loss: 0.167744 - Training Accuracy: 0.367188 - Validation loss: 0.175060 - Validation Accuracy: 0.351562
+Epoch 300/2000 - Training Loss: 0.168297 - Training Accuracy: 0.367188 - Validation loss: 0.162376 - Validation Accuracy: 0.382812
+Epoch 400/2000 - Training Loss: 0.154929 - Training Accuracy: 0.437500 - Validation loss: 0.155727 - Validation Accuracy: 0.437500
+Epoch 500/2000 - Training Loss: 0.143860 - Training Accuracy: 0.484375 - Validation loss: 0.161154 - Validation Accuracy: 0.453125
+Epoch 600/2000 - Training Loss: 0.142817 - Training Accuracy: 0.398438 - Validation loss: 0.146737 - Validation Accuracy: 0.437500
+Epoch 700/2000 - Training Loss: 0.138513 - Training Accuracy: 0.421875 - Validation loss: 0.145565 - Validation Accuracy: 0.453125
+Epoch 800/2000 - Training Loss: 0.146862 - Training Accuracy: 0.421875 - Validation loss: 0.135472 - Validation Accuracy: 0.468750
+Epoch 900/2000 - Training Loss: 0.134294 - Training Accuracy: 0.484375 - Validation loss: 0.125888 - Validation Accuracy: 0.539062
+Epoch 1000/2000 - Training Loss: 0.145131 - Training Accuracy: 0.460938 - Validation loss: 0.142510 - Validation Accuracy: 0.460938
+Epoch 1100/2000 - Training Loss: 0.177822 - Training Accuracy: 0.406250 - Validation loss: 0.172858 - Validation Accuracy: 0.382812
+Epoch 1200/2000 - Training Loss: 0.145908 - Training Accuracy: 0.445312 - Validation loss: 0.135838 - Validation Accuracy: 0.523438
+Epoch 1300/2000 - Training Loss: 0.123713 - Training Accuracy: 0.546875 - Validation loss: 0.119558 - Validation Accuracy: 0.539062
+Epoch 1400/2000 - Training Loss: 0.140843 - Training Accuracy: 0.500000 - Validation loss: 0.144369 - Validation Accuracy: 0.531250
+Epoch 1500/2000 - Training Loss: 0.141576 - Training Accuracy: 0.460938 - Validation loss: 0.125716 - Validation Accuracy: 0.562500
+Epoch 1600/2000 - Training Loss: 0.120133 - Training Accuracy: 0.554688 - Validation loss: 0.116924 - Validation Accuracy: 0.500000
+Epoch 1700/2000 - Training Loss: 0.138565 - Training Accuracy: 0.476562 - Validation loss: 0.120137 - Validation Accuracy: 0.562500
+Epoch 1800/2000 - Training Loss: 0.108342 - Training Accuracy: 0.585938 - Validation loss: 0.130468 - Validation Accuracy: 0.515625
+Epoch 1900/2000 - Training Loss: 0.113692 - Training Accuracy: 0.640625 - Validation loss: 0.122377 - Validation Accuracy: 0.578125
+Epoch 2000/2000 - Training Loss: 0.179081 - Training Accuracy: 0.289062 - Validation loss: 0.171177 - Validation Accuracy: 0.335938
+lstm_size: 128 - layer_num: 14 test_accuracy: 0.4257998466491699
+
+当前隐藏层layer数量： 16
+Epoch 100/2000 - Training Loss: 0.197676 - Training Accuracy: 0.195312 - Validation loss: 0.184357 - Validation Accuracy: 0.367188
+Epoch 200/2000 - Training Loss: 0.178363 - Training Accuracy: 0.265625 - Validation loss: 0.167327 - Validation Accuracy: 0.343750
+Epoch 300/2000 - Training Loss: 0.166207 - Training Accuracy: 0.390625 - Validation loss: 0.166941 - Validation Accuracy: 0.335938
+Epoch 400/2000 - Training Loss: 0.157912 - Training Accuracy: 0.312500 - Validation loss: 0.164680 - Validation Accuracy: 0.390625
+Epoch 500/2000 - Training Loss: 0.151259 - Training Accuracy: 0.382812 - Validation loss: 0.144954 - Validation Accuracy: 0.445312
+Epoch 600/2000 - Training Loss: 0.161676 - Training Accuracy: 0.406250 - Validation loss: 0.136965 - Validation Accuracy: 0.421875
+Epoch 700/2000 - Training Loss: 0.152775 - Training Accuracy: 0.421875 - Validation loss: 0.168150 - Validation Accuracy: 0.343750
+Epoch 800/2000 - Training Loss: 0.156213 - Training Accuracy: 0.445312 - Validation loss: 0.164226 - Validation Accuracy: 0.476562
+Epoch 900/2000 - Training Loss: 0.133202 - Training Accuracy: 0.484375 - Validation loss: 0.145230 - Validation Accuracy: 0.414062
+Epoch 1000/2000 - Training Loss: 0.128956 - Training Accuracy: 0.476562 - Validation loss: 0.112230 - Validation Accuracy: 0.617188
+Epoch 1100/2000 - Training Loss: 0.140216 - Training Accuracy: 0.546875 - Validation loss: 0.119829 - Validation Accuracy: 0.539062
+Epoch 1200/2000 - Training Loss: 0.154446 - Training Accuracy: 0.375000 - Validation loss: 0.144902 - Validation Accuracy: 0.515625
+Epoch 1300/2000 - Training Loss: 0.128297 - Training Accuracy: 0.562500 - Validation loss: 0.126363 - Validation Accuracy: 0.570312
+Epoch 1400/2000 - Training Loss: 0.138121 - Training Accuracy: 0.539062 - Validation loss: 0.134109 - Validation Accuracy: 0.523438
+Epoch 1500/2000 - Training Loss: 0.143216 - Training Accuracy: 0.515625 - Validation loss: 0.132054 - Validation Accuracy: 0.531250
+Epoch 1600/2000 - Training Loss: 0.140355 - Training Accuracy: 0.500000 - Validation loss: 0.113844 - Validation Accuracy: 0.601562
+Epoch 1700/2000 - Training Loss: 0.141359 - Training Accuracy: 0.546875 - Validation loss: 0.138256 - Validation Accuracy: 0.523438
+Epoch 1800/2000 - Training Loss: 0.118047 - Training Accuracy: 0.515625 - Validation loss: 0.111981 - Validation Accuracy: 0.578125
+Epoch 1900/2000 - Training Loss: 0.108497 - Training Accuracy: 0.617188 - Validation loss: 0.103320 - Validation Accuracy: 0.640625
+Epoch 2000/2000 - Training Loss: 0.130525 - Training Accuracy: 0.554688 - Validation loss: 0.126407 - Validation Accuracy: 0.546875
+lstm_size: 128 - layer_num: 16 test_accuracy: 0.5522998571395874
+
+当前隐藏层layer数量： 18
+Epoch 100/2000 - Training Loss: 0.230250 - Training Accuracy: 0.093750 - Validation loss: 0.230205 - Validation Accuracy: 0.125000
+Epoch 200/2000 - Training Loss: 0.200391 - Training Accuracy: 0.218750 - Validation loss: 0.199233 - Validation Accuracy: 0.203125
+Epoch 300/2000 - Training Loss: 0.173144 - Training Accuracy: 0.296875 - Validation loss: 0.181623 - Validation Accuracy: 0.242188
+Epoch 400/2000 - Training Loss: 0.156657 - Training Accuracy: 0.390625 - Validation loss: 0.173103 - Validation Accuracy: 0.289062
+Epoch 500/2000 - Training Loss: 0.166895 - Training Accuracy: 0.335938 - Validation loss: 0.155531 - Validation Accuracy: 0.320312
+Epoch 600/2000 - Training Loss: 0.154729 - Training Accuracy: 0.257812 - Validation loss: 0.154166 - Validation Accuracy: 0.343750
+Epoch 700/2000 - Training Loss: 0.175713 - Training Accuracy: 0.320312 - Validation loss: 0.175877 - Validation Accuracy: 0.296875
+Epoch 800/2000 - Training Loss: 0.182985 - Training Accuracy: 0.406250 - Validation loss: 0.178888 - Validation Accuracy: 0.437500
+Epoch 900/2000 - Training Loss: 0.181997 - Training Accuracy: 0.375000 - Validation loss: 0.178007 - Validation Accuracy: 0.320312
+Epoch 1000/2000 - Training Loss: 0.177738 - Training Accuracy: 0.351562 - Validation loss: 0.173841 - Validation Accuracy: 0.351562
+Epoch 1100/2000 - Training Loss: 0.179072 - Training Accuracy: 0.328125 - Validation loss: 0.176375 - Validation Accuracy: 0.343750
+Epoch 1200/2000 - Training Loss: 0.170810 - Training Accuracy: 0.398438 - Validation loss: 0.164183 - Validation Accuracy: 0.398438
+Epoch 1300/2000 - Training Loss: 0.165410 - Training Accuracy: 0.390625 - Validation loss: 0.170233 - Validation Accuracy: 0.375000
+Epoch 1400/2000 - Training Loss: 0.164571 - Training Accuracy: 0.351562 - Validation loss: 0.162267 - Validation Accuracy: 0.398438
+Epoch 1500/2000 - Training Loss: 0.165487 - Training Accuracy: 0.429688 - Validation loss: 0.155409 - Validation Accuracy: 0.445312
+Epoch 1600/2000 - Training Loss: 0.150849 - Training Accuracy: 0.375000 - Validation loss: 0.155518 - Validation Accuracy: 0.421875
+Epoch 1700/2000 - Training Loss: 0.156081 - Training Accuracy: 0.414062 - Validation loss: 0.163309 - Validation Accuracy: 0.359375
+Epoch 1800/2000 - Training Loss: 0.166432 - Training Accuracy: 0.429688 - Validation loss: 0.149737 - Validation Accuracy: 0.500000
+Epoch 1900/2000 - Training Loss: 0.150843 - Training Accuracy: 0.460938 - Validation loss: 0.140888 - Validation Accuracy: 0.500000
+Epoch 2000/2000 - Training Loss: 0.129158 - Training Accuracy: 0.468750 - Validation loss: 0.127975 - Validation Accuracy: 0.539062
+lstm_size: 128 - layer_num: 18 test_accuracy: 0.43899989128112793
+
+当前隐藏层layer数量： 20
+Epoch 100/2000 - Training Loss: 0.230759 - Training Accuracy: 0.101562 - Validation loss: 0.230243 - Validation Accuracy: 0.109375
+Epoch 200/2000 - Training Loss: 0.229556 - Training Accuracy: 0.093750 - Validation loss: 0.230053 - Validation Accuracy: 0.101562
+Epoch 300/2000 - Training Loss: 0.229799 - Training Accuracy: 0.125000 - Validation loss: 0.230313 - Validation Accuracy: 0.109375
+Epoch 400/2000 - Training Loss: 0.229603 - Training Accuracy: 0.125000 - Validation loss: 0.230251 - Validation Accuracy: 0.078125
+Epoch 500/2000 - Training Loss: 0.229797 - Training Accuracy: 0.125000 - Validation loss: 0.230132 - Validation Accuracy: 0.109375
+Epoch 600/2000 - Training Loss: 0.230030 - Training Accuracy: 0.140625 - Validation loss: 0.230805 - Validation Accuracy: 0.109375
+Epoch 700/2000 - Training Loss: 0.229981 - Training Accuracy: 0.101562 - Validation loss: 0.230322 - Validation Accuracy: 0.062500
+Epoch 800/2000 - Training Loss: 0.186065 - Training Accuracy: 0.273438 - Validation loss: 0.175722 - Validation Accuracy: 0.367188
+Epoch 900/2000 - Training Loss: 0.171570 - Training Accuracy: 0.328125 - Validation loss: 0.158481 - Validation Accuracy: 0.351562
+Epoch 1000/2000 - Training Loss: 0.161964 - Training Accuracy: 0.382812 - Validation loss: 0.152541 - Validation Accuracy: 0.335938
+Epoch 1100/2000 - Training Loss: 0.145975 - Training Accuracy: 0.437500 - Validation loss: 0.135561 - Validation Accuracy: 0.460938
+Epoch 1200/2000 - Training Loss: 0.142085 - Training Accuracy: 0.398438 - Validation loss: 0.153125 - Validation Accuracy: 0.406250
+Epoch 1300/2000 - Training Loss: 0.140336 - Training Accuracy: 0.367188 - Validation loss: 0.133340 - Validation Accuracy: 0.429688
+Epoch 1400/2000 - Training Loss: 0.183486 - Training Accuracy: 0.312500 - Validation loss: 0.167075 - Validation Accuracy: 0.296875
+Epoch 1500/2000 - Training Loss: 0.157438 - Training Accuracy: 0.414062 - Validation loss: 0.166824 - Validation Accuracy: 0.414062
+Epoch 1600/2000 - Training Loss: 0.185434 - Training Accuracy: 0.375000 - Validation loss: 0.159278 - Validation Accuracy: 0.367188
+Epoch 1700/2000 - Training Loss: 0.146493 - Training Accuracy: 0.437500 - Validation loss: 0.149124 - Validation Accuracy: 0.445312
+Epoch 1800/2000 - Training Loss: 0.169169 - Training Accuracy: 0.382812 - Validation loss: 0.170911 - Validation Accuracy: 0.359375
+Epoch 1900/2000 - Training Loss: 0.172030 - Training Accuracy: 0.335938 - Validation loss: 0.174168 - Validation Accuracy: 0.343750
+Epoch 2000/2000 - Training Loss: 0.179244 - Training Accuracy: 0.351562 - Validation loss: 0.170063 - Validation Accuracy: 0.429688
+lstm_size: 128 - layer_num: 20 test_accuracy: 0.3892998993396759
