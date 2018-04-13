@@ -306,7 +306,7 @@ for num_layers in range(1, 14 + 1):
                     lstm_size=lstm_size, num_layers=num_layers,
                     learning_rate=learning_rate)
 
-    saver = tf.train.Saver(max_to_keep=100)
+    # saver = tf.train.Saver(max_to_keep=100)
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
 
