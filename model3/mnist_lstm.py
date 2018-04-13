@@ -1,9 +1,10 @@
+
+
+
 import tensorflow as tf
 import numpy as np
 from tensorflow.contrib import rnn
 from tensorflow.examples.tutorials.mnist import input_data
-
-
 # 数据
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 # 学习率
@@ -29,11 +30,11 @@ def build_inputs(class_num):
     # 在训练和测试的时候，想用不同的 batch_size.所以采用占位符的方式
     batch_size = tf.placeholder(tf.int32, [])
     return x, y, keep_prob, batch_size
-
 # 定义lstm网络结构
 def built_lstm(rnn_size, num_layer, keep_probability, batch_size):
 
     def get_cell(rnn_size, keep_probability):
+
         lstm_cell = rnn.LSTMCell(num_units=rnn_size, initializer=tf.random_uniform_initializer(-0.1, 0.1, seed=2),
                                  forget_bias=1.0, state_is_tuple=True)
         cell = rnn.DropoutWrapper(cell=lstm_cell, input_keep_prob=1.0, output_keep_prob=keep_probability)
@@ -82,7 +83,7 @@ def output_msg(f_name, msg):
 # 连接模块搭建网络
 class LSTM:
     def __init__(self, lstm_size, num_layers, num_classes = class_num,
-                 num_steps = timestep_size, learning_rate = lr, grad_clip = 5):
+                 learning_rate = lr, num_steps = timestep_size, grad_clip = 4):
 
         # 初始化
         tf.reset_default_graph()
@@ -114,8 +115,8 @@ class LSTM:
 
 # lstm_size_list = [32, 64, 128, 192, 256, 320]
 # num_layer_list = [1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-lstm_size_list = [192]
-num_layer_list = [18]
+lstm_size_list = [128]
+num_layer_list = [10, 11, 12, 14, 16]
 for lstm_size in lstm_size_list:
     # out_file_name = "out_lstm_size_" + str(lstm_size) + ".txt"
     # f = open(out_file_name, "w+")
@@ -124,7 +125,8 @@ for lstm_size in lstm_size_list:
     # f.close()
     for num_layer in num_layer_list:
         # output_msg(out_file_name, "\n当前隐藏层layer数量： {}\n".format(num_layer))
-        model = LSTM(lstm_size, num_layer)
+        print("\n当前隐藏层layer数量： {}\n".format(num_layer))
+        model = LSTM(lstm_size, num_layer, learning_rate=lr)
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
             for epoch_i in range(epochs):
