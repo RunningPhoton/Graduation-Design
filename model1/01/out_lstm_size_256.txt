@@ -2,7 +2,8 @@ batch_size = 100
 num_steps = 100
 lstm_size = 256
 learning_rate = 0.001
-keep_prob0.5当前隐藏层layer数量： 1
+keep_prob0.5
+当前隐藏层layer数量： 1
 轮数: 1/40... 训练步数: 100... 训练误差: 3.0409... 0.0259 sec/batch
 轮数: 2/40... 训练步数: 200... 训练误差: 2.5335... 0.0292 sec/batch
 轮数: 2/40... 训练步数: 300... 训练误差: 2.3586... 0.0285 sec/batch
