@@ -10,7 +10,7 @@ offset = 5
 data = []
 X = []
 Y = []
-with open(dir + file_name) as f:
+with open(dir + file_name, encoding='UTF-8') as f:
     cnt = 0
     for line in f:
         if(cnt >= start and (cnt - start) % one_epoch >= one_epoch - mean_size):

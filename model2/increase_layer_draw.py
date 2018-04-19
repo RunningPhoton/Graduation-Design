@@ -12,7 +12,7 @@ validation_data = []
 X = []
 Y = []
 Y1 = []
-with open(dir + file_name) as f:
+with open(dir + file_name, encoding='UTF-8') as f:
     cnt = 0
     for line in f:
         # if(cnt >= start):
@@ -32,5 +32,5 @@ plt.ylabel('Loss')
 plt.xlabel('Layer Number')
 plt.plot(X, Y, color='blue', label='train_loss')
 plt.plot(X, Y1, color='red', label='validation_loss')
-plt.legend(loc='upper right')
+plt.legend(loc='upper left')
 plt.show()

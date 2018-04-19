@@ -13,7 +13,7 @@ test_data = []
 X = []
 Y = []
 Y1 = []
-with open(dir + file_name) as f:
+with open(dir + file_name, encoding='UTF-8') as f:
     cnt = 0
     for line in f:
         # if(cnt >= start):
