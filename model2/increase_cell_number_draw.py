@@ -10,10 +10,10 @@ Y1 = []
 start = 3
 st_read = 300
 ed_read = 309
-dir = '01/'
+dir = '02/'
 for lstm_size in lstm_sizes:
     X.append(lstm_size)
-    file_name = 'out_lstm_size_' + str(lstm_size) + '.txt'
+    file_name = 'out2_lstm_size_' + str(lstm_size) + '.txt'
 
     with open(dir + file_name, encoding='UTF-8') as f:
         data = []

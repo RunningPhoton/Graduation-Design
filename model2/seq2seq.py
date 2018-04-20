@@ -3,9 +3,9 @@ import time
 import numpy as np
 from tensorflow.python.layers.core import Dense
 
-with open('input_data.txt') as f:
+with open('in2.txt') as f:
     source_data = f.read()
-with open('target_data.txt') as f:
+with open('out2.txt') as f:
     target_data = f.read()
 
 print(target_data.split('\n')[:10])
@@ -222,13 +222,13 @@ max_layer = 12
 
 lstm_size_list = [32, 64, 96, 128, 160, 192]
 for rnn_size in lstm_size_list:
-    out_file_name = "out_lstm_size_" + str(rnn_size) + ".txt"
+    out_file_name = "out2_lstm_size_" + str(rnn_size) + ".txt"
     f = open(out_file_name, "w+")
     message = 'batch_size = '+batch_size.__str__()+'\nlstm_size = '+rnn_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
     f.write(message)
     f.close()
 
-    for num_layers in range(5, max_layer + 1):
+    for num_layers in range(1, max_layer + 1):
 
         f = open(out_file_name, "a+");
         f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
@@ -406,7 +406,7 @@ for rnn_size in lstm_size_list:
 # pad = sl2i["<PAD>"]
 #
 # print('原始输入:', input_word)
-#
+#d
 # print('\nSource')
 # print('  Word 编号:    {}'.format([i for i in text]))
 # print('  Input Words: {}'.format(" ".join([si2l[i] for i in text])))

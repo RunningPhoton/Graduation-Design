@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-file_name = 'out_lstm_size_192.txt'
-dir = '01/'
+file_name = 'out2_lstm_size_192.txt'
+dir = '02/'
 start = 3
 one_epoch = 102
 mean_size = 10
