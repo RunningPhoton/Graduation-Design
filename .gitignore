@@ -5,6 +5,8 @@
 *.egg
 *.egg-info
 *.idea
+*.DS_Store
+*/.DS_Store
 dist
 build
 checkpoint
