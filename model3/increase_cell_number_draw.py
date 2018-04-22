@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-lstm_sizes = [32, 64, 128, 192, 256, 320]
+lstm_sizes = [32, 64, 128, 192, 256, 320, 448, 600]
 offset = 9
 X = []
 Y = []

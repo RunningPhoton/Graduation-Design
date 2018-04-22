@@ -289,11 +289,11 @@ class CharRNN:
 
 
 # In[16]:
-
+dir = '01/'
 # lstm_sizes = [128, 192, 256, 384, 512]
-lstm_sizes = [640, 768]
+lstm_sizes = [768]
 for lstm_size in lstm_sizes:
-    out_file_name = "out_lstm_size_" + str(lstm_size) + ".txt";
+    out_file_name = dir + "out_lstm_size_" + str(lstm_size) + ".txt";
     f = open(out_file_name, "w+");
     message = 'batch_size = '+batch_size.__str__()+'\nnum_steps = '+num_steps.__str__()+'\nlstm_size = '+lstm_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
     f.write(message)
