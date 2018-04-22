@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 file_name = 'out_lstm_size_384.txt'
-dir = ''
+dir = '01/'
 start = 4
 one_epoch = 80
 mean_size = 5
