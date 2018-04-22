@@ -114,18 +114,18 @@ class LSTM:
         self.optimizer = build_optimizer(self.loss, learning_rate, grad_clip)
 
 # lstm_size_list = [32, 64, 128, 192, 256, 320]
-# num_layer_list = [1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-lstm_size_list = [128]
-num_layer_list = [10, 11, 12, 14, 16]
+num_layer_list = [1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+lstm_size_list = [448, 600]
+dir = '01/'
 for lstm_size in lstm_size_list:
-    # out_file_name = "out_lstm_size_" + str(lstm_size) + ".txt"
-    # f = open(out_file_name, "w+")
-    # message = 'batch_size = ' + str(128) + '\nlstm_size = ' + lstm_size.__str__() + '\nlearning_rate = ' + lr.__str__()
-    # f.write(message)
-    # f.close()
+    out_file_name = dir + "out_lstm_size_" + str(lstm_size) + ".txt"
+    f = open(out_file_name, "w+")
+    message = 'batch_size = ' + str(128) + '\nlstm_size = ' + lstm_size.__str__() + '\nlearning_rate = ' + lr.__str__()
+    f.write(message + '\n')
+    f.close()
     for num_layer in num_layer_list:
-        # output_msg(out_file_name, "\n当前隐藏层layer数量： {}\n".format(num_layer))
-        print("\n当前隐藏层layer数量： {}\n".format(num_layer))
+        output_msg(out_file_name, "当前隐藏层layer数量： {}".format(num_layer))
+        print("当前隐藏层layer数量： {}\n".format(num_layer))
         model = LSTM(lstm_size, num_layer, learning_rate=lr)
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
@@ -145,14 +145,14 @@ for lstm_size in lstm_size_list:
                               '- Validation loss: {:>6.6f} - Validation Accuracy: {:>6.6f}'\
                             .format(epoch_i + 1, epochs, train_loss, train_accuracy, validation_loss, validation_accuracy)
                     print(msg)
-                    # output_msg(out_file_name, msg)
+                    output_msg(out_file_name, msg)
                 sess.run(model.optimizer, feed_dict={
                     model.inputs: batch[0],
                     model.targets: batch[1],
                     model.keep_prob: 0.5,
                     model.batch_size: _batch_size})
             # 计算测试数据的准确率
-            msg = 'lstm_size: {} - layer_num: {} test_accuracy: {}'.format(
+            msg = 'lstm_size: {} - layer_num: {} test_accuracy: {}\n'.format(
                 lstm_size,
                 num_layer,
                 sess.run(model.accuracy, feed_dict={
@@ -162,4 +162,4 @@ for lstm_size in lstm_size_list:
                     model.batch_size: mnist.test.images.shape[0]})
             )
             print(msg)
-            # output_msg(out_file_name, msg)
+            output_msg(out_file_name, msg)
