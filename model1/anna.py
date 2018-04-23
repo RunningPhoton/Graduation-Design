@@ -292,15 +292,15 @@ def output_message(file_name, msg):
         f.write(msg)
 # In[16]:
 dir = '01/'
-# lstm_sizes = [128, 192, 256, 384, 512]
+# lstm_sizes = [128, 192, 256, 384, 512, 600, 768]
 lstm_sizes = [600]
 for lstm_size in lstm_sizes:
     out_file_name = dir + "out_lstm_size_" + str(lstm_size) + ".txt"
-    f = open(out_file_name, "w+", encoding='utf-8')
-    message = 'batch_size = '+batch_size.__str__()+'\nnum_steps = '+num_steps.__str__()+'\nlstm_size = '+lstm_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
-    f.write(message)
-    f.close()
-    for num_layers in range(1, 14):
+    # f = open(out_file_name, "w+", encoding='utf-8')
+    # message = 'batch_size = '+batch_size.__str__()+'\nnum_steps = '+num_steps.__str__()+'\nlstm_size = '+lstm_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
+    # f.write(message)
+    # f.close()
+    for num_layers in range(9, 14):
 
         output_message(out_file_name, "\n当前隐藏层layer数量： %d\n" % num_layers)
         epochs = 40

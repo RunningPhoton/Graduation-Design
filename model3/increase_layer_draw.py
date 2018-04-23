@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-file_name = 'out_lstm_size_192.txt'
+file_name = 'out_lstm_size_448.txt'
 dir = '01/'
 start = 2
 one_epoch = 23
