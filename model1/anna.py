@@ -287,22 +287,22 @@ class CharRNN:
 
 # In[15]:
 
-
+def output_message(file_name, msg):
+    with open(file_name, "a+", encoding='utf-8') as f:
+        f.write(msg)
 # In[16]:
 dir = '01/'
 # lstm_sizes = [128, 192, 256, 384, 512]
-lstm_sizes = [768]
+lstm_sizes = [600]
 for lstm_size in lstm_sizes:
-    out_file_name = dir + "out_lstm_size_" + str(lstm_size) + ".txt";
-    f = open(out_file_name, "w+");
+    out_file_name = dir + "out_lstm_size_" + str(lstm_size) + ".txt"
+    f = open(out_file_name, "w+", encoding='utf-8')
     message = 'batch_size = '+batch_size.__str__()+'\nnum_steps = '+num_steps.__str__()+'\nlstm_size = '+lstm_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
     f.write(message)
     f.close()
     for num_layers in range(1, 14):
 
-        f = open(out_file_name, "a+");
-        f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
-        f.close()
+        output_message(out_file_name, "\n当前隐藏层layer数量： %d\n" % num_layers)
         epochs = 40
 
         model = CharRNN(len(vocab), num_steps=num_steps,
@@ -348,6 +348,4 @@ for lstm_size in lstm_sizes:
                               '验证误差: {:.4f}...'.format(validation_loss) + \
                               '{:.4f} sec/batch'.format(end - start)
                         print(msg)
-                        f = open(out_file_name, "a+");
-                        f.write(msg+'\n')
-                        f.close();
+                        output_message(out_file_name, msg+'\n')
