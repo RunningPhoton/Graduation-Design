@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-lstm_sizes = [128, 192, 256, 384, 512]
+lstm_sizes = [128, 192, 256, 384, 512, 600, 768]
 offset = 5
 X = []
 Y = []
