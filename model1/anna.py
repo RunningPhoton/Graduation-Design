@@ -144,7 +144,7 @@ def build_lstm(lstm_size, num_layers, batch_size, keep_prob):
     for i in range(num_layers):
 
         # 构建一个基本lstm单元
-        lstm = tf.contrib.rnn.BasicLSTMCell(lstm_size, state_is_tuple=True)
+        lstm = tf.contrib.rnn.GRUCell(lstm_size)
 
         # 添加dropout
         drop = tf.contrib.rnn.DropoutWrapper(lstm, output_keep_prob=keep_prob)
@@ -291,15 +291,14 @@ def output_message(file_name, msg):
     with open(file_name, "a+", encoding='utf-8') as f:
         f.write(msg)
 # In[16]:
-dir = '01/'
-# lstm_sizes = [128, 192, 256, 384, 512, 600, 768]
-lstm_sizes = [600]
+dir = '02/'
+lstm_sizes = [128, 192, 256, 384, 512, 600, 768]
 for lstm_size in lstm_sizes:
     out_file_name = dir + "out_lstm_size_" + str(lstm_size) + ".txt"
-    # f = open(out_file_name, "w+", encoding='utf-8')
-    # message = 'batch_size = '+batch_size.__str__()+'\nnum_steps = '+num_steps.__str__()+'\nlstm_size = '+lstm_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
-    # f.write(message)
-    # f.close()
+    f = open(out_file_name, "w+", encoding='utf-8')
+    message = 'batch_size = '+batch_size.__str__()+'\nnum_steps = '+num_steps.__str__()+'\nlstm_size = '+lstm_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
+    f.write(message)
+    f.close()
     for num_layers in range(9, 14):
 
         output_message(out_file_name, "\n当前隐藏层layer数量： %d\n" % num_layers)
