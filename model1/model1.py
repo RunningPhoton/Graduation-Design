@@ -15,7 +15,7 @@ batch_size = 100  # 每个batch中的输入量
 num_steps = 100  # 每个sequence的长度
 learning_rate = 0.001  # 学习率
 keep_prob = 0.5  # Dropout层保存率
-
+epochs = 5
 # 验证集
 
 validation_encoded = encoded[:batch_size*num_steps]
@@ -238,6 +238,7 @@ dir = '02/'
 # lstm核心变化
 
 # lstm_sizes = [128, 192, 256, 384, 512, 600, 768]
+checkpoint_dir = 'checkpoints'
 lstm_sizes = [512]
 for lstm_size in lstm_sizes:
     # out_file_name = dir + "out_lstm_size_" + str(lstm_size) + ".txt"
@@ -251,7 +252,7 @@ for lstm_size in lstm_sizes:
     for num_layers in range(2, 3):
 
         # output_message(out_file_name, "\n当前隐藏层layer数量： %d\n" % num_layers)
-        epochs = 40
+
 
         model = CharRNN(len(vocab), num_steps=num_steps,
                         lstm_size=lstm_size, num_layers=num_layers,
@@ -264,18 +265,26 @@ for lstm_size in lstm_sizes:
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
             saver = tf.train.Saver()
+
+            ckpt = tf.train.get_checkpoint_state(checkpoint_dir)
+            if ckpt and ckpt.model_checkpoint_path:
+                saver.restore(sess, ckpt.model_checkpoint_path)
+                print('loaded')
             counter = 0
             for e in range(epochs):
                 # Train network
-                # new_state = sess.run(model.initial_state)
+                new_state = sess.run(model.initial_state)
                 loss = 0
                 for x, y in get_batches(encoded, batch_size, num_steps):
                     counter += 1
                     start = time.time()
 
-                    feed = {model.inputs: x,
-                            model.targets: y,
-                            model.keep_prob: keep_prob}
+                    feed = {
+                        model.inputs: x,
+                        model.targets: y,
+                        model.keep_prob: keep_prob,
+                        model.initial_state: new_state
+                    }
                     batch_loss, new_state, _ = sess.run([model.loss,
                                                          model.final_state,
                                                          model.optimizer],
@@ -287,7 +296,8 @@ for lstm_size in lstm_sizes:
                                                    feed_dict={
                                                        model.inputs: validation_x,
                                                        model.targets: validation_y,
-                                                       model.keep_prob: keep_prob
+                                                       model.keep_prob: keep_prob,
+                                                       model.initial_state: new_state
                                                    })
                         msg = '轮数: {}/{}... '.format(e + 1, epochs) + \
                               '训练步数: {}... '.format(counter) + \
@@ -295,12 +305,13 @@ for lstm_size in lstm_sizes:
                               '验证误差: {:.4f}...'.format(validation_loss) + \
                               '{:.4f} sec/batch'.format(end - start)
                         print(msg)
-            saver.save(sess, "checkpoints/i{}_l{}.ckpt".format(counter, lstm_size))
+
+            saver.save(sess, "checkpointss/i{}_l{}.ckpt".format(counter, lstm_size))
 
                         # output_message(out_file_name, msg+'\n')
 
 
-tf.train.get_checkpoint_state('checkpoints')
+
 
 def pick_top_n(preds, vocab_size, top_n=5):
     """
@@ -322,7 +333,7 @@ def pick_top_n(preds, vocab_size, top_n=5):
 
 
 
-def sample(checkpoint, n_samples, lstm_size, vocab_size, prime="The "):
+def sample(checkpoint, n_samples, lstm_size, num_layers, vocab_size, prime="The "):
     """
     生成新文本
 
@@ -335,7 +346,7 @@ def sample(checkpoint, n_samples, lstm_size, vocab_size, prime="The "):
     # 将输入的单词转换为单个字符组成的list
     samples = [c for c in prime]
     # sampling=True意味着batch的size=1 x 1
-    model = CharRNN(len(vocab), lstm_size=lstm_size, sampling=True)
+    model = CharRNN(vocab_size, lstm_size=lstm_size, num_layers=num_layers, sampling=True, learning_rate=learning_rate)
     saver = tf.train.Saver()
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
@@ -353,7 +364,7 @@ def sample(checkpoint, n_samples, lstm_size, vocab_size, prime="The "):
             preds, new_state = sess.run([model.prediction, model.final_state],
                                         feed_dict=feed)
 
-        c = pick_top_n(preds, len(vocab))
+        c = pick_top_n(preds, vocab_size)
         # 添加字符到samples中
         samples.append(int_to_vocab[c])
 
@@ -366,39 +377,42 @@ def sample(checkpoint, n_samples, lstm_size, vocab_size, prime="The "):
             preds, new_state = sess.run([model.prediction, model.final_state],
                                         feed_dict=feed)
 
-            c = pick_top_n(preds, len(vocab))
+            c = pick_top_n(preds, vocab_size)
             samples.append(int_to_vocab[c])
 
     return ''.join(samples)
 
 
-# Here, pass in the path to a checkpoint and sample from the network.
 
-# In[20]:
-
-tf.train.latest_checkpoint('checkpoints')
-
-# In[26]:
+tf.train.latest_checkpoint(checkpoint_dir)
 
 # 选用最终的训练参数作为输入进行文本生成
-checkpoint = tf.train.latest_checkpoint('checkpoints')
-samp = sample(checkpoint, 1000, lstm_size, len(vocab), prime="The")
+checkpoint = tf.train.latest_checkpoint(checkpoint_dir)
+samp = sample(checkpoint, 1000, lstm_sizes[0], 2, len(vocab), prime="The")
 print(samp)
 
 # output layer = 2, lstm_size = 512
 
-# The had been all her husband, and she
-# did not know, when he was all sorry for her. But and there was no
-# mucch, but he had to speak of his father, and the propisition of them, and at
-# her sors of soldiery arrivel with his feeling of this still man was
-# so talking to her health of the country, and he could not like the first
-# of this well--and had seen her face and some doubts of the peasants who
-# should never say. Brand to say, and to be a shill, she done to her
-# head that, in which the sold hundred walked up the sound of the country, who
-# had said to her, she seemed to him when the sense of their point of her
-# sour, had never had bore harred by her husband and disconceive her
-# hand. He stopped hard, he felt indecenting to be as a man with station, and
-# was seeing her houre. "And you would see her as they deserve have that she
-# will be still more in a low artist and a cloak of heart of me. The
-# servant was to start her house with the same famoraries, and the sort of
-# more and still mare who's so that s
+# There, and, with having been
+# a completely sort of spiritual seconds of men. And as anything
+# that she had been drunks and tears in a few sense. The coming, that had
+# seen him the station with his wife and weaking of the people he was
+# defined an electronit finishing to his brother-in--were never throbe,
+# was now staring at the strain a stead a craim of children.
+#
+# "I am not a few telling your present to sprend that," said Alexey
+# Alexandrovitch a particularly smile. "What is the same as I am
+# at once the mutter, in his sing men, I'm going in, I am.
+#
+# "Anna don't were to do?"
+#
+# "Were you to be strengthening? I have too money, but that's a man of
+# my children.... We've to be a solution of homoral signs of some time,
+# but that will so little for their man, whom I wonker to her and the
+# calling on the conversation with a subject as a lovior of a painful other
+# it. I don't understand."
+#
+# "I shall be the tark to be done," he said, listening his wife at her
+# wife.
+#
+# "You're so, but without them for you such infinite"
