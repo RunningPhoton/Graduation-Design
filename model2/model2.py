@@ -3,48 +3,48 @@ import time
 import numpy as np
 from tensorflow.python.layers.core import Dense
 
-with open('in2.txt') as f:
+with open('input_data.txt') as f:
     source_data = f.read()
-with open('out2.txt') as f:
+with open('target_data.txt') as f:
     target_data = f.read()
 
-print(target_data.split('\n')[:10])
+# print(target_data.split('\n')[:10])
 
 
-
+# 输入数据处理
 def extract_character_vocab(data):
     '''
     < PAD>: 补全字符。
     < EOS>: 解码器端的句子结束标识符。
-    < UNK>: 低频词或者一些未遇到过的词等。
+    < UNK>: 未遇到过的词。
     < GO>: 解码器端的句子起始标识符。
-    :param data:
-    :return:
     '''
     # 构建映射表
     special_words = ['<PAD>', '<UNK>', '<GO>', '<EOS>']
     set_words = list(set([char for line in data.split('\n') for char in line]))
-    #把四个特殊字符添加进词典
+    # 把四个特殊字符添加进词典
     int_to_vocab = {idx: word for idx, word in enumerate(special_words + set_words)}
     vocab_to_int = {word: idx for idx, word in int_to_vocab.items()}
     return int_to_vocab, vocab_to_int
 
+# source_data 的词汇转换
 si2l, sl2i = extract_character_vocab(source_data)
 
+# target_data 的词汇转换
 ti2l, tl2i = extract_character_vocab(target_data)
 
+#
 source_int = [[sl2i.get(letter, sl2i['<UNK>'])
                for letter in line] for line in source_data.split('\n')]
+
 target_int = [[tl2i.get(letter, tl2i['<UNK>'])
                for letter in line] + [tl2i['<EOS>']] for line in target_data.split('\n')]
 
-# print(source_int[:10])
-# print(target_int[:10])
 
+# 输入层
 def get_inputs():
     '''
     模型输入tensor
-    :return:
     '''
 
     inputs = tf.placeholder(tf.int32, [None, None], name='inputs')
@@ -58,6 +58,7 @@ def get_inputs():
 
     return inputs, targets, learning_rate, target_sequence_length, max_target_sequence_length, source_sequence_length
 
+# 编码层 输出最后一层状态
 def get_encoder_layer(input_data, rnn_size, num_layers,
                       source_sequence_length, source_vocab_size,
                       encoding_embedding_size):
@@ -71,35 +72,39 @@ def get_encoder_layer(input_data, rnn_size, num_layers,
     :param encoding_embedding_size: enbedding的大小
     :return:
     '''
-    # Encoder embedding
+    # 词向量嵌入
+
     encoder_embed_input = tf.contrib.layers.embed_sequence(
         input_data, source_vocab_size, encoding_embedding_size)
 
-    # RNN cell
+    # RNN核
+
     def get_lstm_cell(rnn_size):
         lstm_cell = tf.contrib.rnn.LSTMCell(
             rnn_size, initializer=tf.random_uniform_initializer(-0.1, 0.1, seed=2))
         drop = tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob=keep_prob)
         return drop
+    # 堆叠
+
     multiple_cell = tf.contrib.rnn.MultiRNNCell([get_lstm_cell(rnn_size) for _ in range(num_layers)])
     encoder_output, encoder_state = tf.nn.dynamic_rnn(
         multiple_cell, encoder_embed_input, sequence_length=source_sequence_length,
         dtype=tf.float32)
     return encoder_output, encoder_state
 
+# 预处理target 数据
 def process_decoder_input(data, vocab_to_int, batch_size):
     '''
     补充<GO>,移除最后一个字符
-    :param data:
-    :param vocab_to_int:
-    :param batch_size:
-    :return:
     '''
-    # cut latest char
+
+    # 移除最后一个字符
+
     ending = tf.strided_slice(data, [0, 0], [batch_size, -1], [1, 1])
     decoder_input = tf.concat([tf.fill([batch_size, 1], vocab_to_int['<GO>']), ending], 1)
     return decoder_input
 
+# 驿码层
 def decoding_layer(tl2i, decoding_embedding_size, num_layers, rnn_size,
                    target_sequence_length, max_target_sequence_length,
                    encoder_state, decoder_input):
@@ -164,10 +169,15 @@ def decoding_layer(tl2i, decoding_embedding_size, num_layers, rnn_size,
             [batch_size], name='start_tokens'
         )
 
-        predicting_helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
-            decoder_embeddings, start_tokens, tl2i['<EOS>'])
-        predicting_decoder = tf.contrib.seq2seq.BasicDecoder(
-            cell, predicting_helper, encoder_state, output_layer)
+        predicting_helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(decoder_embeddings,
+                                                                     start_tokens,
+                                                                     tl2i['<EOS>'])
+
+        predicting_decoder = tf.contrib.seq2seq.BasicDecoder(cell,
+                                                             predicting_helper,
+                                                             encoder_state,
+                                                             output_layer)
+
         predicting_decoder_output, _, _ = tf.contrib.seq2seq.dynamic_decode(
             predicting_decoder, impute_finished=True,
             maximum_iterations=max_target_sequence_length)
@@ -203,36 +213,79 @@ def seq2seq_model(input_data, targets, lr, target_sequence_length,
 
 # 超参数
 # Number of Epochs
-epochs = 50
+epochs = 30
+
 # Batch Size
 batch_size = 128
-# RNN Size
-# rnn_size = 64
-# Number of Layers
-# num_layers = 2
+
 # Embedding Size
 encoding_embedding_size = 15
 decoding_embedding_size = 15
+
 # Learning Rate
 learning_rate = 0.001
+
 # keep probility
 keep_prob = 0.8
+
 # max_layer
-max_layer = 12
+# max_layer = 12
+max_layer = 2
+# lstm_size_list = [32, 64, 96, 128, 160, 192]
+def pad_sentence_batch(sentence_batch, pad_int):
+    '''
+    对batch中的序列进行补全，保证batch中的每行都有相同的sequence_length
+    :param sentence_batch:
+    :param pad_int: <PAD>对应的索引号
+    :return:
+    '''
 
-lstm_size_list = [32, 64, 96, 128, 160, 192]
+    max_sentence = max([len(sentence) for sentence in sentence_batch])
+    return [sentence + [pad_int] * (max_sentence - len(sentence)) for sentence in sentence_batch]
+
+
+def get_batches(targets, sources, batch_size, source_pad_int, target_pad_int):
+    '''
+    定义生成器，用来获取batch
+    :param targets:
+    :param sources:
+    :param batch_size:
+    :param source_pad_int:
+    :param target_pad_int:
+    :return:
+    '''
+
+    for batch_i in range(0, len(sources) // batch_size):
+        start_i = batch_i * batch_size
+        sources_batch = sources[start_i: start_i + batch_size]
+        targets_batch = targets[start_i: start_i + batch_size]
+        # 补全序列
+        pad_sources_batch = np.array(pad_sentence_batch(sources_batch, source_pad_int))
+        pad_targets_batch = np.array(pad_sentence_batch(targets_batch, target_pad_int))
+
+        # 记录每条记录的长度
+        targets_lengths = []
+        for target in targets_batch:
+            targets_lengths.append(len(target))
+
+        source_lengths = []
+        for source in sources_batch:
+            source_lengths.append(len(source))
+
+        yield pad_targets_batch, pad_sources_batch, targets_lengths, source_lengths
+lstm_size_list = [128]
 for rnn_size in lstm_size_list:
-    out_file_name = "out2_lstm_size_" + str(rnn_size) + ".txt"
-    f = open(out_file_name, "w+")
-    message = 'batch_size = '+batch_size.__str__()+'\nlstm_size = '+rnn_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
-    f.write(message)
-    f.close()
+    # out_file_name = "out2_lstm_size_" + str(rnn_size) + ".txt"
+    # f = open(out_file_name, "w+")
+    # message = 'batch_size = '+batch_size.__str__()+'\nlstm_size = '+rnn_size.__str__()+'\nlearning_rate = '+learning_rate.__str__()+'\nkeep_prob'+keep_prob.__str__()
+    # f.write(message)
+    # f.close()
 
-    for num_layers in range(1, max_layer + 1):
+    for num_layers in range(2, max_layer + 1):
 
-        f = open(out_file_name, "a+");
-        f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
-        f.close();
+        # f = open(out_file_name, "a+");
+        # f.write("\n当前隐藏层layer数量： %d\n" % num_layers)
+        # f.close();
 
         # 构造graph
         train_graph = tf.Graph()
@@ -260,61 +313,22 @@ for rnn_size in lstm_size_list:
             masks = tf.sequence_mask(target_sequence_length, max_target_sequence_length, dtype=tf.float32, name='masks')
 
             with tf.name_scope('optimiation'):
-                # Loss function
+                # 损失函数
                 cost = tf.contrib.seq2seq.sequence_loss(
                     training_logits,
                     targets,
                     masks
                 )
 
-                # Optimizer
+                # 优化器
                 optimizer = tf.train.AdamOptimizer(lr)
 
-                # Gradient Clipping
+                # 梯度消减
                 gradients = optimizer.compute_gradients(cost)
                 capped_gradients = [(tf.clip_by_value(grad, -5.0, 5.0), var) for grad, var in gradients if grad is not None]
                 train_op = optimizer.apply_gradients(capped_gradients)
 
-        def pad_sentence_batch(sentence_batch, pad_int):
-            '''
-            对batch中的序列进行补全，保证batch中的每行都有相同的sequence_length
-            :param sentence_batch:
-            :param pad_int: <PAD>对应的索引号
-            :return:
-            '''
 
-            max_sentence = max([len(sentence) for sentence in sentence_batch])
-            return [sentence + [pad_int] * (max_sentence - len(sentence)) for sentence in sentence_batch]
-
-        def get_batches(targets, sources, batch_size, source_pad_int, target_pad_int):
-            '''
-            定义生成器，用来获取batch
-            :param targets:
-            :param sources:
-            :param batch_size:
-            :param source_pad_int:
-            :param target_pad_int:
-            :return:
-            '''
-
-            for batch_i in range(0, len(sources) // batch_size):
-                start_i = batch_i * batch_size
-                sources_batch = sources[start_i : start_i + batch_size]
-                targets_batch = targets[start_i : start_i + batch_size]
-                # 补全序列
-                pad_sources_batch = np.array(pad_sentence_batch(sources_batch, source_pad_int))
-                pad_targets_batch = np.array(pad_sentence_batch(targets_batch, target_pad_int))
-
-                #记录每条记录的长度
-                targets_lengths = []
-                for target in targets_batch:
-                    targets_lengths.append(len(target))
-
-                source_lengths = []
-                for source in sources_batch:
-                    source_lengths.append(len(source))
-
-                yield pad_targets_batch, pad_sources_batch, targets_lengths, source_lengths
 
         # Train
 
@@ -334,6 +348,7 @@ for rnn_size in lstm_size_list:
 
         with tf.Session(graph=train_graph) as sess:
             sess.run(tf.global_variables_initializer())
+            saver = tf.train.Saver()
             for epoch_i in range(1, epochs + 1):
                 for batch_i, (targets_batch, sources_batch, targets_lengths, sources_lengths) in enumerate(
                     get_batches(train_target, train_source, batch_size, sl2i['<PAD>'], tl2i['<PAD>'])):
@@ -367,50 +382,61 @@ for rnn_size in lstm_size_list:
                                       loss,
                                       validation_loss[0], end_time - start_time)
                         print(msg)
-                        f = open(out_file_name, "a+");
-                        f.write(msg + '\n')
-                        f.close();
-        # saver = tf.train.Saver()
-        # saver.save(sess, './' + checkpoint)
-        # print('Model Trained and Saved')
+                        # f = open(out_file_name, "a+");
+                        # f.write(msg + '\n')
+                        # f.close();
 
-# def source_to_seq(text):
-#     '''
-#     对源数据进行转换
-#     '''
-#     sequence_length = 7
-#     return [sl2i.get(word, sl2i['<UNK>']) for word in text] + [sl2i['<PAD>']]*(sequence_length-len(text))
+            saver.save(sess, 'checkpoints/' + checkpoint)
+            # print('Model Trained and Saved')
+
+def source_to_seq(text):
+    '''
+    对源数据进行转换
+    '''
+    sequence_length = 7
+    return [sl2i.get(word, sl2i['<UNK>']) for word in text] + [sl2i['<PAD>']]*(sequence_length-len(text))
+
+# 输入一个单词
+input_word = 'networks'
+text = source_to_seq(input_word)
+
+checkpoint = "checkpoints/trained_model.ckpt"
+
+loaded_graph = tf.Graph()
+with tf.Session(graph=loaded_graph) as sess:
+    sess.run(tf.global_variables_initializer())
+    # 加载模型
+    loader = tf.train.import_meta_graph(checkpoint + '.meta')
+    loader.restore(sess, checkpoint)
+
+    input_data = loaded_graph.get_tensor_by_name('inputs:0')
+    logits = loaded_graph.get_tensor_by_name('predictions:0')
+    source_sequence_length = loaded_graph.get_tensor_by_name('source_sequence_length:0')
+    target_sequence_length = loaded_graph.get_tensor_by_name('target_sequence_length:0')
+
+    answer_logits = sess.run(logits, {input_data: [text]*batch_size,
+                                      target_sequence_length: [len(input_word)]*batch_size,
+                                      source_sequence_length: [len(input_word)]*batch_size})[0]
+
+
+pad = sl2i["<PAD>"]
+
+print('original input:', input_word)
+
+print('\nSource')
+print('  Word 编号:    {}'.format([i for i in text]))
+print('  Input Words: {}'.format(" ".join([si2l[i] for i in text])))
+
+print('\nTarget')
+print('  Word 编号:       {}'.format([i for i in answer_logits if i != pad]))
+print('  Response Words: {}'.format(" ".join([ti2l[i] for i in answer_logits if i != pad])))
+
+# original input: networks
 #
-# # 输入一个单词
-# input_word = 'common'
-# text = source_to_seq(input_word)
+# Source
+#   Word 编号:    [18, 5, 14, 22, 9, 27, 13, 4]
+#   Input Words: n e t w o r k s
 #
-# checkpoint = "./trained_model.ckpt"
-#
-# loaded_graph = tf.Graph()
-# with tf.Session(graph=loaded_graph) as sess:
-#     # 加载模型
-#     loader = tf.train.import_meta_graph(checkpoint + '.meta')
-#     loader.restore(sess, checkpoint)
-#
-#     input_data = loaded_graph.get_tensor_by_name('inputs:0')
-#     logits = loaded_graph.get_tensor_by_name('predictions:0')
-#     source_sequence_length = loaded_graph.get_tensor_by_name('source_sequence_length:0')
-#     target_sequence_length = loaded_graph.get_tensor_by_name('target_sequence_length:0')
-#
-#     answer_logits = sess.run(logits, {input_data: [text]*batch_size,
-#                                       target_sequence_length: [len(input_word)]*batch_size,
-#                                       source_sequence_length: [len(input_word)]*batch_size})[0]
-#
-#
-# pad = sl2i["<PAD>"]
-#
-# print('原始输入:', input_word)
-#d
-# print('\nSource')
-# print('  Word 编号:    {}'.format([i for i in text]))
-# print('  Input Words: {}'.format(" ".join([si2l[i] for i in text])))
-#
-# print('\nTarget')
-# print('  Word 编号:       {}'.format([i for i in answer_logits if i != pad]))
-# print('  Response Words: {}'.format(" ".join([ti2l[i] for i in answer_logits if i != pad])))
+# Target
+#   Word 编号:       [5, 13, 18, 9, 27, 4, 14, 22]
+#   Response Words: e k n o r s t w

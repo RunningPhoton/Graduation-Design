@@ -11,7 +11,7 @@ start = 5
 mean_size = 5
 st_read = 239
 ed_read = 244
-dir = '01/'
+dir = '02/'
 for lstm_size in lstm_sizes:
     X.append(lstm_size)
     file_name = 'out_lstm_size_' + str(lstm_size) + '.txt'

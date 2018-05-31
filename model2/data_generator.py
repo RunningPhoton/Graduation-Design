@@ -2,7 +2,7 @@ import re
 
 all_in = []
 all_out = []
-with open('anna.txt') as f:
+with open('data.txt') as f:
     for line in f:
         in_txt = re.findall('[a-zA-Z]+', line)
         for word in in_txt:
